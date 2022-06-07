@@ -1,4 +1,4 @@
-package petros.efthymiou.groovy
+package petros.efthymiou.groovy.playlist
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater

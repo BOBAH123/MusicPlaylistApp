@@ -1,4 +1,4 @@
-package petros.efthymiou.groovy
+package petros.efthymiou.groovy.playlist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import petros.efthymiou.groovy.R
 
 class PlaylistFragment : Fragment() {
 

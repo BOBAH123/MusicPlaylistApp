@@ -1,27 +1,18 @@
-package petros.efthymiou.groovy
+package petros.efthymiou.groovy.playlist
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Test
-
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
-import org.junit.Rule
-import petros.efthymiou.groovy.utils.MainCoroutineScopeRule
+import org.junit.Test
+import petros.efthymiou.groovy.utils.BaseUnitTest
 import petros.efthymiou.groovy.utils.getValueForTest
 
-class PlaylistViewModelShould {
-
-    @get:Rule
-    var coroutinesTestRule = MainCoroutineScopeRule()
-
-    @get:Rule
-    var instantTaskExecutorRule = InstantTaskExecutorRule()
+class PlaylistViewModelShould : BaseUnitTest() {
 
     private lateinit var viewModel: PlaylistViewModel
     private val repository: PlaylistRepository = mock()
@@ -42,14 +33,14 @@ class PlaylistViewModelShould {
     }
 
     @Test
-    fun getPlaylistFromRepository() = runBlockingTest{
+    fun getPlaylistFromRepository() = runBlockingTest {
         viewModel.playlists.getValueForTest()
 
         verify(repository).getPlaylist()
     }
 
     @Test
-    fun emitsPlaylistFromRepository() = runBlockingTest{
+    fun emitsPlaylistFromRepository() = runBlockingTest {
 
         assertEquals(expected, viewModel.playlists.getValueForTest())
     }
