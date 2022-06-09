@@ -11,6 +11,7 @@ import org.junit.Before
 import org.junit.Test
 import petros.efthymiou.groovy.utils.BaseUnitTest
 import petros.efthymiou.groovy.utils.getValueForTest
+import java.lang.RuntimeException
 
 class PlaylistViewModelShould : BaseUnitTest() {
 
@@ -18,6 +19,7 @@ class PlaylistViewModelShould : BaseUnitTest() {
     private val repository: PlaylistRepository = mock()
     private val playlist = mock<List<Playlist>>()
     private val expected = Result.success(playlist)
+    private val exception = RuntimeException("Something went wrong")
 
     @Before
     fun setUp() {
@@ -30,6 +32,18 @@ class PlaylistViewModelShould : BaseUnitTest() {
         }
 
         viewModel = PlaylistViewModel(repository)
+    }
+
+    @Test
+    fun emitErrorWhenReceiveError() {
+        runBlocking {
+            whenever(repository.getPlaylist()).thenReturn(
+                flow {
+                    emit(Result.failure<List<Playlist>>(exception))
+                }
+            )
+        }
+        assertEquals(exception, viewModel.playlists.getValueForTest()!!.exceptionOrNull())
     }
 
     @Test
