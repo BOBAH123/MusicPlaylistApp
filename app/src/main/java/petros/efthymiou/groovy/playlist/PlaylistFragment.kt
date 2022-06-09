@@ -15,7 +15,10 @@ class PlaylistFragment : Fragment() {
 
     lateinit var viewModel: PlaylistViewModel
     lateinit var viewModelFactory: PlaylistViewModelFactory
-    private val repository = PlaylistRepository()
+
+    private val playlistAPI = PlaylistAPI()
+    private val service = PlaylistService(playlistAPI)
+    private val repository = PlaylistRepository(service)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
