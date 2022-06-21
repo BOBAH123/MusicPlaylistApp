@@ -32,20 +32,27 @@ class PlaylistFragment : Fragment() {
 
         setUpViewModel()
 
+        observeLoader()
+        observePlaylists(view)
+
+        return view
+    }
+
+    private fun observeLoader() {
         viewModel.loader.observe(this as LifecycleOwner) { loading ->
             when (loading) {
                 true -> loader.visibility = View.VISIBLE
                 false -> loader.visibility = View.GONE
             }
         }
+    }
 
+    private fun observePlaylists(view: View) {
         viewModel.playlists.observe(this as LifecycleOwner) { playlists ->
             if (playlists.getOrNull() != null) {
                 setUpList(view.playlists_list, playlists.getOrNull()!!)
             }
         }
-
-        return view
     }
 
     private fun setUpList(

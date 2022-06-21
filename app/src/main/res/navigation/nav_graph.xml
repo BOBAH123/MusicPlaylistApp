@@ -16,12 +16,12 @@
 
     <fragment
         android:id="@+id/playlistDetailsFragment"
-        android:name="petros.efthymiou.groovy.PlaylistDetailsFragment"
-        android:label="fragment_playlist_details"
-        tools:layout="@layout/fragment_playlist_details" >
+        android:name="petros.efthymiou.groovy.details.PlaylistDetailsFragment"
+        android:label="PlaylistDetailsFragment">
         <argument
             android:name="playlistId"
             app:argType="string"
             app:nullable="false"/>
     </fragment>
+
 </navigation>
