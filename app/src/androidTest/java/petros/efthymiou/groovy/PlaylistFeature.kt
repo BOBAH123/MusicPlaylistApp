@@ -5,21 +5,16 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.rule.ActivityTestRule
 import com.schibsted.spain.barista.assertion.BaristaRecyclerViewAssertions.assertRecyclerViewItemCount
 import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions.assertDisplayed
 import com.schibsted.spain.barista.assertion.BaristaVisibilityAssertions.assertNotDisplayed
 import com.schibsted.spain.barista.internal.matcher.DrawableMatcher.Companion.withDrawable
 import org.hamcrest.Matchers.allOf
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class PlaylistFeature : BaseUITest() {
-
-    val mActivityRule = ActivityTestRule(MainActivity::class.java)
-        @Rule get
 
     @Test
     fun displayScreenTitle() {
@@ -35,8 +30,7 @@ class PlaylistFeature : BaseUITest() {
                 withId(R.id.playlist_name),
                 isDescendantOfA(nthChildOf(withId(R.id.playlists_list), 0))
             )
-        )
-            .check(matches(withText("Hard Rock Cafe")))
+        ).check(matches(withText("Hard Rock Cafe")))
             .check(matches(isDisplayed()))
 
         onView(
@@ -44,8 +38,7 @@ class PlaylistFeature : BaseUITest() {
                 withId(R.id.playlist_category),
                 isDescendantOfA(nthChildOf(withId(R.id.playlists_list), 0))
             )
-        )
-            .check(matches(withText("rock")))
+        ).check(matches(withText("rock")))
             .check(matches(isDisplayed()))
 
         onView(
@@ -53,8 +46,7 @@ class PlaylistFeature : BaseUITest() {
                 withId(R.id.playlist_image),
                 isDescendantOfA(nthChildOf(withId(R.id.playlists_list), 1))
             )
-        )
-            .check(matches(withDrawable(R.mipmap.playlist)))
+        ).check(matches(withDrawable(R.mipmap.playlist)))
             .check(matches(isDisplayed()))
     }
 
