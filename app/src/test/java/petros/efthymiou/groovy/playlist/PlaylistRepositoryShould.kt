@@ -13,8 +13,10 @@ import petros.efthymiou.groovy.utils.BaseUnitTest
 class PlaylistRepositoryShould : BaseUnitTest() {
 
     private val service: PlaylistService = mock()
-    private val repository = PlaylistRepository(service)
+    private val mapper: PlaylistMapper = mock()
+    private val repository = PlaylistRepository(service, mapper)
     private val playlists = mock<List<Playlist>>()
+    private val playlistsRaw = mock<List<PlaylistRaw>>()
     private val exception = RuntimeException("Something went wrong")
 
 
@@ -27,23 +29,41 @@ class PlaylistRepositoryShould : BaseUnitTest() {
 
     @Test
     fun propagateErrors() = runBlockingTest {
-        whenever(service.fetchPlaylists()).thenReturn(
-            flow {
-                emit(Result.failure(exception))
-            }
-        )
+        mockErrorCase()
 
         assertEquals(exception, repository.getPlaylist().first().exceptionOrNull())
     }
 
     @Test
-    fun emitPlaylistsFromService() = runBlockingTest {
+    fun emitMappedPlaylistsFromService() = runBlockingTest {
+        mockSuccessfulCase()
+
+        assertEquals(playlists, repository.getPlaylist().first().getOrNull())
+    }
+
+    @Test
+    fun delegateBusinessLogicToMapper() = runBlockingTest {
+        mockSuccessfulCase()
+        repository.getPlaylist().first()
+
+        verify(mapper).invoke(playlistsRaw)
+    }
+
+    private suspend fun mockSuccessfulCase() {
         whenever(service.fetchPlaylists()).thenReturn(
             flow {
-                emit(Result.success(playlists))
+                emit(Result.success(playlistsRaw))
             }
         )
 
-        assertEquals(playlists, repository.getPlaylist().first().getOrNull())
+        whenever(mapper.invoke(playlistsRaw)).thenReturn(playlists)
+    }
+
+    private suspend fun mockErrorCase() {
+        whenever(service.fetchPlaylists()).thenReturn(
+            flow {
+                emit(Result.failure(exception))
+            }
+        )
     }
 }
