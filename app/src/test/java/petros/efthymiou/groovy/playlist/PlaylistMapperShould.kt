@@ -3,6 +3,8 @@ package petros.efthymiou.groovy.playlist
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import petros.efthymiou.groovy.R
+import petros.efthymiou.groovy.playlist.models.PlaylistRaw
+import petros.efthymiou.groovy.playlist.models.mappers.PlaylistMapper
 import petros.efthymiou.groovy.utils.BaseUnitTest
 
 class PlaylistMapperShould : BaseUnitTest() {

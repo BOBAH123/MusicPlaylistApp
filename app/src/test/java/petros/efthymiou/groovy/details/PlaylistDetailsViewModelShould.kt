@@ -8,6 +8,9 @@ import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import petros.efthymiou.groovy.details.models.PlaylistDetails
+import petros.efthymiou.groovy.details.repository.PlaylistDetailsRepository
+import petros.efthymiou.groovy.details.viewModel.PlaylistDetailsViewModel
 import petros.efthymiou.groovy.utils.BaseUnitTest
 import petros.efthymiou.groovy.utils.captureValues
 import petros.efthymiou.groovy.utils.getValueForTest
@@ -15,7 +18,7 @@ import java.lang.RuntimeException
 
 class PlaylistDetailsViewModelShould : BaseUnitTest() {
     private lateinit var viewModel: PlaylistDetailsViewModel
-    private val service: PlaylistDetailsService = mock()
+    private val repository: PlaylistDetailsRepository = mock()
     private val id = "1"
     private val playlistDetails: PlaylistDetails = mock()
     private val expected = Result.success(playlistDetails)
@@ -24,7 +27,7 @@ class PlaylistDetailsViewModelShould : BaseUnitTest() {
 
     @Before
     fun setUp() {
-        viewModel = PlaylistDetailsViewModel(service)
+        viewModel = PlaylistDetailsViewModel(repository)
     }
 
     @Test
@@ -34,7 +37,7 @@ class PlaylistDetailsViewModelShould : BaseUnitTest() {
 
         viewModel.playlistDetails.getValueForTest()
 
-        verify(service).fetchPlaylistDetails(id)
+        verify(repository).fetchPlaylistDetails(id)
     }
 
     @Test
@@ -74,11 +77,11 @@ class PlaylistDetailsViewModelShould : BaseUnitTest() {
     }
 
     private suspend fun mockErrorCase() {
-        whenever(service.fetchPlaylistDetails(id)).thenReturn(flow { emit(error) })
+        whenever(repository.fetchPlaylistDetails(id)).thenReturn(flow { emit(error) })
         viewModel.getPlaylistDetails(id)
     }
 
     private suspend fun mockSuccessfulCase() {
-        whenever(service.fetchPlaylistDetails(id)).thenReturn(flow { emit(expected) })
+        whenever(repository.fetchPlaylistDetails(id)).thenReturn(flow { emit(expected) })
     }
 }

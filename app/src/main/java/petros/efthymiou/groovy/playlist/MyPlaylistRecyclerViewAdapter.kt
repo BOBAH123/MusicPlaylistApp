@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import petros.efthymiou.groovy.R
 
 import petros.efthymiou.groovy.databinding.PlaylistItemBinding
+import petros.efthymiou.groovy.playlist.models.Playlist
 
 class MyPlaylistRecyclerViewAdapter(
     private val values: List<Playlist>,

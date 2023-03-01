@@ -14,6 +14,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_playlist.*
 import kotlinx.android.synthetic.main.fragment_playlist.view.*
 import petros.efthymiou.groovy.R
+import petros.efthymiou.groovy.playlist.models.Playlist
+import petros.efthymiou.groovy.playlist.viewModel.PlaylistViewModel
+import petros.efthymiou.groovy.playlist.viewModel.PlaylistViewModelFactory
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -49,8 +52,8 @@ class PlaylistFragment : Fragment() {
 
     private fun observePlaylists(view: View) {
         viewModel.playlists.observe(this as LifecycleOwner) { playlists ->
-            if (playlists.getOrNull() != null) {
-                setUpList(view.playlists_list, playlists.getOrNull()!!)
+            playlists.getOrNull()?.let { list ->
+                setUpList(view.playlists_list, list)
             }
         }
     }
@@ -72,7 +75,10 @@ class PlaylistFragment : Fragment() {
     }
 
     private fun setUpViewModel() {
-        viewModel = ViewModelProvider(this, viewModelFactory).get(PlaylistViewModel::class.java)
+        viewModel = ViewModelProvider(
+            this,
+            viewModelFactory
+        ).get(PlaylistViewModel::class.java)
     }
 
     companion object {

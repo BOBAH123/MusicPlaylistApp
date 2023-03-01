@@ -8,6 +8,11 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import petros.efthymiou.groovy.playlist.models.Playlist
+import petros.efthymiou.groovy.playlist.models.PlaylistRaw
+import petros.efthymiou.groovy.playlist.models.mappers.PlaylistMapper
+import petros.efthymiou.groovy.playlist.repository.PlaylistRepository
+import petros.efthymiou.groovy.playlist.service.PlaylistService
 import petros.efthymiou.groovy.utils.BaseUnitTest
 
 class PlaylistRepositoryShould : BaseUnitTest() {
