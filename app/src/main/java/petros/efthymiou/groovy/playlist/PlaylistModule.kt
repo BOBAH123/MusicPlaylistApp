@@ -6,6 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.FragmentComponent
 import okhttp3.OkHttpClient
+import petros.efthymiou.groovy.playlist.api.PlaylistAPI
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -22,7 +23,7 @@ class PlaylistModule {
 
     @Provides
     fun retrofit() : Retrofit = Retrofit.Builder()
-        .baseUrl("http://192.168.1.104:3000/") // set local IP
+        .baseUrl("http://10.0.2.2:3000/") // set local IP
         .client(client)
         .addConverterFactory(GsonConverterFactory.create())
         .build()

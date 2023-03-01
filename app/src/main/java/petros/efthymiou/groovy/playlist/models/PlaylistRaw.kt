@@ -1,4 +1,4 @@
-package petros.efthymiou.groovy.playlist
+package petros.efthymiou.groovy.playlist.models
 
 data class PlaylistRaw(
     val id: String,

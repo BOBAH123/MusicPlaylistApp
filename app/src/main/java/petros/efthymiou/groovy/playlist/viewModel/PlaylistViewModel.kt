@@ -1,10 +1,12 @@
-package petros.efthymiou.groovy.playlist
+package petros.efthymiou.groovy.playlist.viewModel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import kotlinx.coroutines.flow.onEach
+import petros.efthymiou.groovy.playlist.models.Playlist
+import petros.efthymiou.groovy.playlist.repository.PlaylistRepository
 
 class PlaylistViewModel(
     private val repository: PlaylistRepository

@@ -12,6 +12,9 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_playlist_details.*
 import petros.efthymiou.groovy.R
+import petros.efthymiou.groovy.details.models.PlaylistDetails
+import petros.efthymiou.groovy.details.viewModel.PlaylistDetailsViewModel
+import petros.efthymiou.groovy.details.viewModel.PlaylistDetailsViewModelFactory
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -29,12 +32,12 @@ class PlaylistDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_playlist_details, container, false)
-        val id = args.playlistId
 
-        viewModel =
-            ViewModelProvider(this, viewModelFactory).get(PlaylistDetailsViewModel::class.java)
-        viewModel.getPlaylistDetails(id)
-
+        viewModel = ViewModelProvider(
+            this,
+            viewModelFactory
+        ).get(PlaylistDetailsViewModel::class.java)
+        viewModel.getPlaylistDetails(args.playlistId)
 
         observeDetails()
         observeLoader()

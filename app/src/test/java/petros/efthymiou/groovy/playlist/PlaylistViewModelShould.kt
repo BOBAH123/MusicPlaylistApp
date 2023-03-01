@@ -9,6 +9,9 @@ import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import petros.efthymiou.groovy.playlist.models.Playlist
+import petros.efthymiou.groovy.playlist.repository.PlaylistRepository
+import petros.efthymiou.groovy.playlist.viewModel.PlaylistViewModel
 import petros.efthymiou.groovy.utils.BaseUnitTest
 import petros.efthymiou.groovy.utils.captureValues
 import petros.efthymiou.groovy.utils.getValueForTest
